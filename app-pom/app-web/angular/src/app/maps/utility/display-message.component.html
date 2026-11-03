@@ -1,0 +1,114 @@
+<div [ngStyle]="mapDivStyle()">
+    <div class='lgr_col'>
+        <div class='lgr_27 col_32'><span class='white' id='title'>Display Messages</span></div>
+    </div>
+
+    <div class='lgr_col'>
+        <div class='lgr_17 col_45'><span class='green' id='system_label'>          System:</span></div>
+        <div class='lgr_10 col_65'><dynamic-field [id]='"system"' [size]=10 [line]=2 [column]=65
+                [(ngModel)]='system'></dynamic-field></div>
+    </div>
+
+    <div class='lgr_col'>
+        <div class='lgr_17 col_01'><span class='green' id='queue_label'>Queue . . . . . :</span></div>
+        <div class='lgr_10 col_21'><dynamic-field [id]='"queue"' [size]=10 [line]=2 [column]=21
+                [(ngModel)]='queue'></dynamic-field></div>
+
+        <div class='lgr_17 col_45'><span class='green' id='program_label'>Program . . . . :</span></div>
+        <div class='lgr_10 col_65'><dynamic-field [id]='"program"' [size]=10 [line]=3 [column]=65
+                [(ngModel)]='program'></dynamic-field></div>
+    </div>
+
+    <div class='lgr_col'>
+        <div class='lgr_17 col_01'><span class='green' id='library1_label'>  Library . . . :</span></div>
+        <div class='lgr_10 col_23'><dynamic-field [id]='"library1"' [size]=10 [line]=3 [column]=23
+                [(ngModel)]='library1'></dynamic-field></div>
+
+        <div class='lgr_17 col_45'><span class='green' id='library2_label'>  Library . . . :</span></div>
+        <div class='lgr_10 col_65'><dynamic-field [id]='"library2"' [size]=10 [line]=4 [column]=65
+                [(ngModel)]='library2'></dynamic-field></div>
+    </div>
+
+    <div class='lgr_col'>
+        <div class='lgr_17 col_01'><span class='green' id='severity_label'>Severity  . . . :</span></div>
+        <div class='lgr_10 col_21'><dynamic-field [id]='"severity"' [size]=2 [line]=4 [column]=21
+                [(ngModel)]='severity'></dynamic-field></div>
+        <div class='lgr_17 col_45'><span class='green' id='delivery_label'>Delivery  . . . :</span></div>
+        <div class='lgr_10 col_65'><dynamic-field [id]='"delivery"' [size]=10 [line]=5 [column]=65
+                [(ngModel)]='delivery'></dynamic-field></div>
+    </div>
+
+    <div class='lgr_col'></div>
+
+    <div class='lgr_col'>
+        <div class='lgr_78 col_01'><span class='blue' id='instruction'>Type reply (if required), press Enter.</span>
+        </div>
+    </div>
+
+    <!-- Message display area -->
+    <div [ngClass]="displaySfl()" (click)="onTableClick($event)" style="pointer-events: auto !important;">
+        <app-table #table
+            [id]="'msgs'"
+            [rows]="msgs"
+            [nbDisplayedEntries]="13"
+            [nbLinesByRow]="1"
+        >
+            <ng-template let-i>
+                <div class="lgr_col split" [attr.data-row-index]="i" [attr.data-msg-id]="$any(msgs[i])?.msgId || null" style="pointer-events: auto !important; position: relative;">
+                    <display-message-msg
+                        *ngIf="msgs.length > i"
+                        [msg]="msgs[i]"
+                        [index]="i">
+                    </display-message-msg>
+                    <!-- Overlay to capture clicks on disabled inputs -->
+                    <div style="position: absolute; inset: 0; pointer-events: auto;"></div>
+                </div>
+            </ng-template>
+        </app-table>
+    </div>
+
+    <div class='lgr_col'>
+        <!-- Primary Function Keys Row 1 -->
+        <div class='lgr_08 col_01'>
+            <dynamic-field [id]='"labelF3Exit"' [size]=8 [line]=23 [column]=1 [(ngModel)]='labelF3Exit'></dynamic-field>
+        </div>
+        <div class='lgr_35 col_22'>
+            <dynamic-field [id]='"labelF11RemoveMessage"' [size]=35 [line]=23 [column]=22 [(ngModel)]='labelF11RemoveMessage'></dynamic-field>
+        </div>
+        <div class='lgr_10 col_59'>
+            <dynamic-field [id]='"labelF12Cancel"' [size]=10 [line]=23 [column]=59 [(ngModel)]='labelF12Cancel'></dynamic-field>
+        </div>
+
+        <!-- Secondary Function Keys Row 1 -->
+        <div class='lgr_15 col_01'>
+            <dynamic-field [id]='"labelF10DisplayAll"' [size]=15 [line]=23 [column]=1 [(ngModel)]='labelF10DisplayAll'></dynamic-field>
+        </div>
+    </div>
+
+    <div class='lgr_col'>
+        <!-- Primary Function Keys Row 2 -->
+        <div class='lgr_14 col_01'>
+            <dynamic-field [id]='"labelF13RemoveAll"' [size]=14 [line]=24 [column]=1 [(ngModel)]='labelF13RemoveAll'></dynamic-field>
+        </div>
+        <div class='lgr_35 col_22'>
+            <dynamic-field [id]='"labelF16RemoveAllExceptUnanswered"' [size]=35 [line]=24 [column]=22 [(ngModel)]='labelF16RemoveAllExceptUnanswered'></dynamic-field>
+        </div>
+        <div class='lgr_13 col_59'>
+            <dynamic-field [id]='"labelF24MoreKeys1"' [size]=13 [line]=24 [column]=59 [(ngModel)]='labelF24MoreKeys1'></dynamic-field>
+        </div>
+
+        <!-- Secondary Function Keys Row 2 -->
+        <div class='lgr_24 col_01'>
+            <dynamic-field [id]='"labelF22DisplayDetails"' [size]=24 [line]=24 [column]=1 [(ngModel)]='labelF22DisplayDetails'></dynamic-field>
+        </div>
+        <div class='lgr_12 col_28'>
+            <dynamic-field [id]='"labelF24MoreKeys2"' [size]=13 [line]=24 [column]=28 [(ngModel)]='labelF24MoreKeys2'></dynamic-field>
+        </div>
+    </div>
+
+    <div class='lgr_col'>
+        <div class='lgr_78 col_01 display-message-clfail-white'>
+            <dynamic-field [id]='"clfail"' [size]=78 [line]=25 [column]=1 [(ngModel)]='clfail'></dynamic-field>
+        </div>
+    </div>
+</div>

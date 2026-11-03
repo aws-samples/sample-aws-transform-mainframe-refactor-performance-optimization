@@ -1,0 +1,367 @@
+report:
+  output:
+    path:
+      template: "Reports/{PROGID}"
+    name:
+      template: "{PRINTERNAME}_{DATE}{TIME}"
+    name.override:
+      template: "{PRINTERNAME}-{USRDTA}-{DATE}{TIME}"
+    jobNumber:
+      default: "000000"
+    jobName:
+      default: "Interactive"
+    time:
+      format: HHmmss
+    date:
+      format: yyyyMMdd
+reportFormat: PDF
+
+#### DEFAULT APPLICATION-MAIN.YML FILE      #####
+#### SHOWING USEFULL CONFIGURATION ELEMENTS #####
+#### SHOULD BE OVERRIDED AND EXTERNALIZED   #####
+
+#################################
+##### Logging configuration #####
+#################################
+logging:
+  config: classpath:logback-main.xml
+  level:
+    org.springframework.beans.factory.support.DefaultListableBeanFactory: WARN
+    # Brave: default tracing implementation for GapWalk distributed tracing
+    brave.Tracer: WARN
+################################
+##### Spring configuration #####
+################################
+spring:
+  quartz:
+    auto-startup: false
+    scheduler-name: Default
+    properties:
+      org.quartz.threadPool.threadCount: 1
+  jta:
+    enabled: false
+    atomikos.properties.maxTimeout : 600000 
+    atomikos.properties.default-jta-timeout : 100000 
+  jpa:
+# DISABLE OpenEntityManagerInViewInterceptor  
+    open-in-view: false
+    # Fix Postgres JPA Error:
+    # Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+    properties.hibernate.temp.use_jdbc_metadata_defaults : false
+#####################################
+##### Jics tables configuration #####
+#####################################
+
+    # The dialect should match the jics datasource choice
+    database-platform : org.hibernate.dialect.PostgreSQLDialect # org.hibernate.dialect.PostgreSQLDialect, org.hibernate.dialect.SQLServerDialect
+    
+    # those properties can be used to create and initialize jics tables automatically.
+#    properties:
+#      hibernate:
+#      globally_quoted_identifiers: true
+#        hbm2ddl:
+#           import_files_sql_extractor : org.hibernate.tool.schema.internal.script.MultiLineSqlScriptExtractor
+#           import_files : file:./setup/initJics.sql
+#           auto : create
+
+##########################
+###### Level 2 cache #####
+##########################
+#        cache:
+#          use_second_level_cache: true
+#          use_query_cache: true
+#          region:
+#            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+#      javax:
+#        persistence:
+#          sharedCache:
+#            mode: ENABLE_SELECTIVE
+##########################
+###### Redis settings #####
+##########################
+  session:
+    store-type: none #redis
+
+##########################################
+##### Embedded Bluesam configuration #####
+##########################################
+bluesam :
+  cache : ehcache
+  persistence : pgsql #pgsql, mssql, xodus...
+  ehcache:
+    resource-pool:
+      size: 4GB
+  write-behind:
+    enabled: true
+  pgsql :
+    dataSource : bluesamDs
+
+#########################
+##### Jics settings #####
+#########################
+rabbitmq.host: localhost
+jics: 
+  cache: false #redis
+  resource-definitions.store-type: jpa # default value: jpa, other possible value: redis
+#  redis.hostname: 127.0.0.1 # Redis server host.
+#  redis.password: redis # Login password of the redis server.
+#  redis.port: 6379 # Redis server port.
+#  redis.username: # Redis username
+#  redis.useSsl: true # Enable SSL in-transit encryption. Default: false
+#  redis.mode: standalone # Redis mode. Possible values: standalone, cluster
+jics.disableSyncpoint : false
+#jics.initList:
+#jics.parameters.datform: DDMMYY
+#jics.parameters.applid: VELOCITY
+#jics.parameters.sysid: CICS
+#jics.parameters.eibtrmid: TERM
+#jics.parameters.userid: MYUSERID
+#jics.parameters.username: MYUSERNAME
+#jics.parameters.opid: XXX
+#jics.parameters.cwa.length: 0
+#jics.parameters.netname: MYNETNAME
+#jics.parameters.jobname: MJOBNAME
+#jics.parameters.sysname: SYSNAME
+
+##############################################
+##### Jics RunUnitLauncher pool settings #####
+##############################################
+#jics.runUnitLauncherPool.enable: false
+#jics.runUnitLauncherPool.size: 20
+#jics.runUnitLauncherPool.validationInterval: 1000
+#jics.runUnitLauncherPool.parallelism: 2
+
+#########################
+##### Jhdb settings #####
+#########################
+#jhdb.lterm: LTERMVAL
+#jhdb.identificationCardData: SomeIDData
+
+###################################
+##### DateHelper configuration ####
+###################################
+#forcedDate: "2013-08-26T12:59:58+01:57"
+
+#############################
+##### Sort configuration ####
+#############################
+#externalSort.threshold: 256MB
+
+###################################
+##### Server timeout (10 min)  ####
+###################################
+spring.mvc.async.request-timeout: 600000
+
+###############################
+##### DATABASE STATISTICS  ####
+###############################
+databaseStatistics : false
+#database.cursor.raise.already.opened.error : false
+
+################################################
+##### SQL Date / time formats configuration ####
+################################################
+
+# DB to PGM - The dateTimeFormat [ISO-EUR-JIS-USA-LOCAL] describes how to spill database date time timestamp type into data simplifier entities
+# Here after are the default values
+#dateTimeFormat : ISO
+
+# To specified you owned output format, set datetimeFormat to LOCAL and some of following properties :
+# Here after are the default values
+#pgmDateFormat : yyyy-MM-dd
+#pgmTimeFormat : HH.mm.ss
+#pgmTimestampFormat : yyyy-MM-dd-HH.mm.ss.SSSSSS
+
+# PGM to DB - First, dateTimeFormat is used to interpret PGM value as recognized formats, then interpreted value is formated to expected target database format.
+# Here after are the default values
+#dbDateFormat : yyyy-MM-dd
+#dbTimeFormat : HH:mm:ss
+#dbTimestampFormat : yyyy-MM-dd HH:mm:ss.SSSSSS
+#dbDateFormat : dd.MM.yyyy
+#dateTimeFormat : EUR
+
+######################
+##### CALLS GRAPH ####
+######################
+callGraph : false
+
+###############################
+##### SQL SHIFT CODE POINT ####
+###############################
+# Code point 384 match unicode character \u0180
+sqlCodePointShift : 384 
+
+###############################
+##### LOCK TIMEOUT RECORD  ####
+###############################
+# Blu4IV record lock timeout 
+lockTimeout : 100
+
+########################################################################
+####                  	 REPORTS OUTPUT CONFIG               		####
+#### Specify the report output configuration utilizing predefined 	####
+#### place-holders.				  		        					####
+####                                                  				####
+#### Possible placeholder values: 									####
+#### {USERNAME} 	: Fetched from SharedContext 					####
+#### {JOBNUMBER} 	: Will be the number of the job if within a		####
+####				  quartz job execution, default otherwise		####
+#### {PROGID}		: The entry point program id					####
+#### {JOBNAME}		: Will be the name of the job if within a 		####
+####			 	  quartz job execution, default otherwise		####
+#### {PRINTERNAME}	: The name of the printer, ideally should only	####
+####				  be used for reportNameTemplate.				####
+#### {USRDTA}		: The value provided for USRDTA parameter 		####
+####				  during an override (OVRPRTF). 				####
+####				  Can only be used for							####
+####                  report.output.name.override.template			####
+#### {DATE}			: The current date in specified format using	####
+####				  report.output.date.format						####
+#### {TIME}   		: The current time in specified format using	####
+####				  report.output.time.format						####
+####																####
+#### The report report.output.name.override.template is only 		####
+#### considered when an override has been performed on a printer	####
+#### file AND USRDTA parameter was specified.						####
+####																####
+#### Default values if not specified:								####
+####	report.output.path.template: "/reports/{PROGID}"			####
+####	report.output.name.template: "{PRINTERNAME}_{DATE}{TIME}"	####
+####	report.output.name.override.template: 						####
+####    "{PRINTERNAME}-{USRDTA}-{DATE}{TIME}"						####
+####	report.output.jobNumber.default: 000000						####
+####	report.output.jobName.default: "Interactive"				####
+####	report.output.time.format: HHmmss							####
+####	report.output.date.format: yyyyMMdd							####
+####	reportFormat: PDF											####
+########################################################################
+#report.output.path.template: "/reports/{PROGID}"
+#report.output.name.template: "{PRINTERNAME}_{DATE}{TIME}"
+#report.output.name.override.template: "{PRINTERNAME}-{USRDTA}-{DATE}{TIME}"
+#report.output.jobNumber.default: "000000"
+#report.output.jobName.default: "Interactive"
+#report.output.time.format: HHmmss
+#report.output.date.format: yyyyMMdd
+#reportFormat: PDF
+
+##############################
+##### TASK EXECUTOR       ####
+##############################
+taskExecutor: 
+  corePoolSize: 5
+  maxPoolSize: 200
+  queueCapacity: 0
+  allowCoreThreadTimeOut: false
+  
+##############################
+##### PROGRAM NOT FOUND   ####
+##############################
+stopExecutionWhenProgNotFound: true
+
+######################################################
+#####  DISP DEFAULT VALUE (to be removed one day) ####
+######################################################
+defaultKeepExistingFiles: true
+
+#############################################################################
+#####  THRU FILE BUILDERS WRITES INTO DEDICATED LOGGER INSTEAD OF SYSOUT ####
+#############################################################################
+#file.stdoutIntoLogger: false
+
+#####################################
+#####  JOBQUEUE CONFIGURATION    ####
+#####################################
+jobqueue:
+  api.enabled: false
+  impl: none # possible values: quartz, none
+  logging.quartz.jobDiscriminator: none # possible values: none or template
+  interrupt.delay: 30 # maximum 30 seconds
+  interrupt.standby: false	# whether to put scheduler in standby mode after all jobs successfully interrupt
+  schedulers:  # list of schedulers
+    -
+      name: queue1
+      threadCount: 5
+    -
+      name: queue2
+      threadCount: 5
+      
+################################################################################
+##### QUERY BUILDING                                                          ##
+# useConcatCondition : false by default 
+# if true, in the query, the where condition is build with key concatenation  ##
+################################################################################
+# query.useConcatCondition: true      
+
+####################################
+#####  CONTEXT PRE CONSTRUCT    ####
+####################################
+context.preconstruct.enable: false
+context.preconstruct.parallelism: 10
+context.preconstruct.frequencyInMillis: 100
+
+################################################################################
+###  MESSAGE QUEUE CONFIGURATION                                              ##
+# Message queues are disabled by default, should be enabled per project need  ##
+################################################################################
+blu4ivmq:
+  queues.enabled: false
+  # queues.broker: rabbitmq
+  # queues.rabbitMQHost: localhost
+  # queues.rabbitMQVirtualHost: /
+  # queues.rabbitMQPort: 5672
+  # queues.rabbitMQUsername: guest
+  # queues.rabbitMQPassword: guest
+  allowedTypes: INFO,STATUS,NOTIFY,INQ #possible values: INFO, STATUS, NOTIFY, INQ, ESCAPE, DIAG, RQS, COMP
+
+########################################
+#####  JCL Batch Restart Mechanism  ####
+########################################
+jcl:
+  checkpoint:
+    enabled: false
+    # provider: redis
+    # redis:
+    #   hostname: 127.0.0.1
+    #   port: 6379
+    #   password: 
+    #   username: 
+    #   mode: standalone
+#################################################
+#####  JCL Null Statement(NULLJCL) Handling  ####
+##### When true,  // ends job (EOF mode);    ####
+##### When false, // is ignored (IGNORE mode)####
+#################################################
+jcl.nullJclEof: true
+##########################################################
+#                Gapwalk database support                #
+# useSavePointToRestoreFail: false by default            #
+#   -true, save point will be created before an insert   #
+#     statement unless excluded in queries.mapping       #
+#   -false, save point will be created before an insert  #
+#     only if included in queries.mapping                #
+##########################################################
+gapwalk:
+  database:
+    support:
+      useSavePointToRestoreFail: false
+  ratelimiting:
+    enabled: false
+    requestsPerMinute: 1000
+    burstCapacity: 1500
+    includeHeaders: true
+
+########################################################################
+#                       Blu4iv Data Access Config                      #
+# useOldDaoDesign: A global flag that determines if the application is #
+#                  to use the old DAO architecture or the new. This is # 
+#                  dependent on whether the DAO's were generated using #
+#                  old or new design. This setting can be overwritten  #
+#                  on program and call level if need be.               #
+#                  For old(true):  DAO's must be registered using the  #
+#                                  DAOManager.registerOldDAO method    #
+#                  For new(false): DAO's must be registered using the  #
+#                                  DAOManager.registerDAO method       # 
+#                  Default value: false                                #
+########################################################################
+blu4iv.dataaccess.useOldDaoDesign: false
+gapwalk.tracing.enabled: false

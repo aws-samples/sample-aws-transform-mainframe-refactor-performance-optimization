@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+<!-- Project type: pom, project name: app-pom -->
+	<classpathentry combineaccessrules="false" kind="src" path="/app-tools"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/app-entities"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/app-service"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/app-web"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

@@ -1,0 +1,8 @@
+<div class="break-message-toast" *ngIf="breakMessageService.visible" role="alert" aria-live="assertive">
+    <div class="break-message-content">
+        <span class="break-message-text">{{ breakMessageService.message }}</span>
+        <button class="break-message-close" (click)="dismiss()" aria-label="Close notification">
+            &#x2715;
+        </button>
+    </div>
+</div>

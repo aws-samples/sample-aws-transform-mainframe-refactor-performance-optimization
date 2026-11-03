@@ -1,0 +1,34 @@
+# OS / IDE
+.DS_Store
+.idea/
+*.iml
+
+# Build output and frontend tooling
+target/
+app-pom/app-web/angular/node_modules/
+app-pom/app-web/angular/node/
+app-pom/app-web/angular/dist/
+app-pom/app-web/angular/.angular/
+
+# Vendor runtime: AWS Transform for mainframe runtime 5.274.0, obtained separately
+/gapwalk-5.274.0/
+
+# Reference docs not part of the app
+*.pdf
+
+# Tomcat server: keep only our customizations, not Tomcat or runtime binaries, logs or temp
+/server/*
+!/server/conf/
+/server/conf/Catalina/
+!/server/bin/
+/server/bin/*
+!/server/bin/setenv.sh
+!/server/bin/config/
+!/server/bin/CLOUDFRM.TRADING.BATCHDB2.CARD/
+
+# Security scan output and local secrets
+.ash/
+ash-scan-output-*/
+.env
+.env.*
+*.log

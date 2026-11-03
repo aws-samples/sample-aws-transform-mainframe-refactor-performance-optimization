@@ -1,0 +1,52 @@
+# If the datasource support mode is not static-xa, spring JTA transactions autoconfiguration must me disabled
+spring.jta.enabled : false
+logging.config : classpath:logback-utility.xml
+
+# Encoding
+encoding : CP1047
+
+# Encoding to be used by INFUTILB and DSNUTILB to generate and read SYSPUNCH files
+# sysPunchEncoding : Cp1047
+
+# primary datasource comes from JNDI jdbc/primary (conf/server.xml)
+
+# Zoned mode : valid values = EBCDIC_STRICT, EBCDIC_MODIFIED, AS400 
+# zonedMode : EBCDIC_STRICT
+
+# Unload properties 
+# For date/time: if use database configuration is enabled, formats are ignored
+# For nbi; use hexadecimal syntaxe to specify the byte value
+unload:
+  sqlCodePointShift: 0
+  nbi:
+    whenNull: "6F"
+    whenNotNull: "00"
+    writeNullIndicator: true
+  useDatabaseConfiguration: false
+  DFSIGDCB: false
+  format:
+    date: MM/dd/yyyy
+    time: HH.mm.ss
+    timestamp: yyyy-MM-dd-HH.mm.ss.SSSSSS
+
+# Load properties 
+# Batch size for DSNUTILB Load Task
+load:
+  sqlCodePointShift: 0
+# batchSize: 500
+  format:
+    localDate: dd.MM.yyyy|dd/MM/yyyy|yyyy-MM-dd
+    dbDate: yyyy-MM-dd
+    localTime: HH:mm:ss|HH.mm.ss
+    dbTime: HH:mm:ss
+
+# Enable to trigger checking if DB columns come from DB2 GRAPHIC columns and
+# so, when getting such value, remove SOSI inserted by specific (CUSTOM930 and derived) charset.
+# Default : false
+#hasGraphic: true
+convertGraphicDataToFullWidth: true
+
+# Used in Adastrip program for batch read from jildb.
+# Default batchSize: 1000
+adastrip:
+  batchSize: 5

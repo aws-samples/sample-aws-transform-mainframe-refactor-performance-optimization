@@ -1,0 +1,62 @@
+#################################
+##### Logging configuration #####
+#################################
+logging.config: classpath:logback-bac.xml
+logging.level.org.springframework.beans.factory.support.DefaultListableBeanFactory : WARN
+  
+############################
+##### JTAconfiguration #####
+############################  
+spring.jta.enabled : false
+
+#############################
+##### JPA configuration #####
+#############################
+# Fix Postgres JPA Error:
+# Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults : false
+spring.jpa.database-platform : org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.hbm2ddl.auto : update
+
+####################################
+##### Datasource configuration #####
+####################################
+#datasource.bacDs.driver-class-name : org.postgresql.Driver 
+#datasource.bacDs.url : jdbc:postgresql://localhost/bluesam
+#datasource.bacDs.username : bluesam
+#datasource.bacDs.password : bluesam
+#datasource.bacDs.type : org.postgresql.ds.PGSimpleDataSource
+
+################################
+##### Upload configuration #####
+################################
+bac.upload.maxSize: 5120MB
+
+##############################
+##### CRUD configuration #####
+##############################
+bac.crud.limit: 10
+bac.crud.encoding: cp037
+bac.crud.initCharacter: "LOW-VALUE"
+bac.crud.defaultCharacter: " "
+bac.crud.blankCharacter: " "
+bac.crud.strictZoned: true
+bac.crud.decimalSeparator: "."
+bac.crud.currencySign: "$"
+bac.crud.pictureCurrencySign: "$"
+
+# Disable Redis connection
+spring.session.store-type: none
+
+# Uncomment this part when you're deploying a STANDALONE BAC
+# bluesam configuration
+# bluesam:
+#   disabled: false
+#   remote: false
+#   persistence: pgsql
+#   write-behind:
+#     threads: 8
+#     batchSize: 10000
+#     enabled: true
+#   pgsql :
+#     dataSource : bacDs

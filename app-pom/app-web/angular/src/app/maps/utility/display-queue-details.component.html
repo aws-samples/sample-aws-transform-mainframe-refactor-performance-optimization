@@ -1,0 +1,135 @@
+<div [ngStyle]="mapDivStyle()">
+  <!-- Header -->
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_24 col_01'">
+      <span class='default' id='title'>Display Message Queue Details</span>
+    </div>
+  </div>
+
+  <div class='lgr_col empty'></div>
+
+  <!-- Queue Details -->
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Message queue . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"queueName"' [size]=20 [(ngModel)]='queueName'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_05'">
+      <span class='default'>Library . . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"library"' [size]=10 [(ngModel)]='library'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Delivery  . . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"delivery"' [size]=10 [(ngModel)]='delivery'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Program . . . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"program"' [size]=20 [(ngModel)]='program'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Allow jobs to reply . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"allowReply"' [size]=10 [(ngModel)]='allowReply'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Severity  . . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"severity"' [size]=5 [(ngModel)]='severity'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Allow alerts  . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"allowAlerts"' [size]=4 [(ngModel)]='allowAlerts'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>CCSID . . . . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"ccsid"' [size]=5 [(ngModel)]='ccsid'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Message queue full  . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"msgqfull"' [size]=10 [(ngModel)]='msgqfull'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Force to auxiliary</span>
+    </div>
+  </div>
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_05'">
+      <span class='default'>Storage . . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_20 col_33'">
+      <dynamic-field [id]='"force"' [size]=4 [(ngModel)]='force'></dynamic-field>
+    </div>
+  </div>
+
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_30 col_03'">
+      <span class='default'>Description . . . . . . :</span>
+    </div>
+    <div [ngClass]="'lgr_40 col_33'">
+      <dynamic-field [id]='"description"' [size]=50 [(ngModel)]='description'></dynamic-field>
+    </div>
+  </div>
+
+  <!-- Empty lines to fill screen -->
+  <div class='lgr_col empty' *ngFor="let i of [].constructor(8)"></div>
+
+  <!-- Bottom -->
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_75 col_01'">
+      <span class='blue'>Press Enter to continue.</span>
+    </div>
+  </div>
+
+  <div class='lgr_col empty'></div>
+
+  <!-- Function Keys -->
+  <div class='lgr_col'>
+    <div [ngClass]="'lgr_20 col_01'"><span class='blue'>F3=Exit</span></div>
+    <div [ngClass]="'lgr_20 col_25'"><span class='blue'>F12=Cancel</span></div>
+  </div>
+
+  <div class='lgr_col empty'></div>
+</div>

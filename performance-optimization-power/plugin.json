@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "performance-optimization-power",
+  "version": "1.1.0",
+  "description": "Performance optimization guidance for AWS Transform for mainframe refactor applications migrated from AS/400/iSeries or z/OS COBOL/DB2. Identify hotspots and apply SQLExecutorBuilder joins, DAO batch operations, and pre-load or lazy caching to eliminate database round-trips, then verify end to end.",
+  "author": {
+    "name": "Amazon Web Services"
+  },
+  "keywords": [
+    "performance",
+    "optimization",
+    "optimize",
+    "slow",
+    "batch",
+    "SQLExecutorBuilder",
+    "hotspot",
+    "latency",
+    "mainframe",
+    "cursor",
+    "cache",
+    "round-trip"
+  ],
+  "license": "MIT-0"
+}

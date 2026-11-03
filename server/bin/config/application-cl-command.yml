@@ -1,0 +1,43 @@
+# Project Configuration
+gapwalk-application.cl:
+  repository.root.folder: ./
+  messageFileFolder: .
+  # Values of QDATSEP and QDATFMT used to format QDATE system value
+  # Uncomment to change defaults of / and MDY
+  #date.separator: / # possible values: ".", ",", "/", "-", " ", ""
+  #date.format: MDY  # possible values: MDY, YMD, DMY, JUL
+  # Default encoding used by CPYFRMIMPF when reading a CSV
+  # Default encoding used by CPYTOIMPF when writing a CSV
+  # impf.default.encoding: UTF-8 # possible values: UTF-8, CP1047, any other valid encoding/charset
+  # dspffd.capitalize.column-name: false # boolean value (true or false)
+  ##################################
+  ##### FTP/SFTP settings #####
+  ###################################
+  ftpservice:
+    protocol: SFTP
+  ftp:
+    host: ftp.example.com
+    port: 21
+    passive: false
+  sftp:
+    host: sftp.example.com
+    port: 22
+    keyPath: /path/to/your-sftp-private-key.pem   # placeholder - SFTP is not used by this sample
+  
+#####################################
+#####  JOBQUEUE CONFIGURATION    ####
+#####################################
+jobqueue:
+  api.enabled: true
+  impl: quartz # possible values: quartz, none
+  schedulers:  # list of schedulers
+    -
+      name: queue1
+      threadCount: 5
+    -
+      name: queue2
+      threadCount: 5
+
+  
+clcommand:
+  sndpgmmsg.abortOnEmptyCallTree: true # SndPgmMsg will throw an exception (aborting the job) if callStack s empty (and attempted to be accessed)
